@@ -1,0 +1,9 @@
+name: ${project.name}
+main: com.poixson.discord.DiscordPlugin
+version: ${project.version}
+api-version: ${spigot-short-version}
+depend:
+  - pxnPluginLib
+authors: [ lorenzop ]
+website: ${project.url}
+description: ${project.description}
