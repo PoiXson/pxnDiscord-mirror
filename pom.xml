@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated: Sun Jun  9 02:14:17 AM EDT 2024 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<name>pxnDiscord</name>
+	<artifactId>pxndiscord</artifactId>
+	<groupId>com.poixson</groupId>
+	<version>0.1.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<url>https://poixson.com</url>
+	<description>Discord bot for chat and voice</description>
+	<organization>
+		<name>PoiXson</name>
+		<url>https://poixson.com</url>
+	</organization>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.license>AGPLv3</project.license>
+		<java.version>21</java.version>
+		<maven.compiler.release>21</maven.compiler.release>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+
+		<!-- Maven Plugins -->
+		<maven-resources-plugin-version>3.3.1</maven-resources-plugin-version>
+		<maven-compiler-plugin-version>3.11.0</maven-compiler-plugin-version>
+		<maven-jar-plugin-version>3.3.0</maven-jar-plugin-version>
+		<maven-source-plugin-version>3.3.0</maven-source-plugin-version>
+		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
+		<git-commit-id-version>4.9.10</git-commit-id-version>
+		<maven-shade-plugin-version>3.5.1</maven-shade-plugin-version>
+
+		<!-- Dependencies -->
+		<spigot-short-version>1.20</spigot-short-version>
+		<spigot-api-version>1.20.6-R0.1-SNAPSHOT</spigot-api-version>
+		<common-core-version>[4.0.0,)</common-core-version>
+		<plugin-lib-version>[4.0.0,)</plugin-lib-version>
+		<javacord-core-version>[3,)</javacord-core-version>
+
+	</properties>
+	<scm>
+		<url>https://git.poixson.com/summary/mc!pxnDiscord.git</url>
+		<connection>scm:git:https://git.poixson.com/r/mc/pxnDiscord.git</connection>
+		<developerConnection>scm:ssh://git.poixson.com/mc/pxnDiscord.git</developerConnection>
+	</scm>
+	<issueManagement>
+		<system>pxngit</system>
+		<url>https://github.com/PoiXson/pxnDiscord-mirror/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>pxnJenkins</system>
+		<url>https://ci.poixson.com</url>
+	</ciManagement>
+	<build>
+		<directory>target/</directory>
+		<sourceDirectory>src/</sourceDirectory>
+		<outputDirectory>target/classes/</outputDirectory>
+		<finalName>${project.name}-${project.version}</finalName>
+		<resources>
+			<resource>
+				<directory>resources/</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>plugin.yml</include>
+					<include>app.properties</include>
+					<include>icon.png</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+
+			<!-- Resource Plugin -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>${maven-resources-plugin-version}</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>png</nonFilteredFileExtension>
+						<nonFilteredFileExtension>so</nonFilteredFileExtension>
+						<nonFilteredFileExtension>dll</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+			<!-- Compiler Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin-version}</version>
+				<configuration>
+					<source>21</source>
+					<target>21</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- Jar Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin-version}</version>
+			</plugin>
+
+			<!-- Source Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin-version}</version>
+				<configuration>
+					<finalName>${project.name}-${project.version}</finalName>
+					<attach>false</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Eclipse Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${maven-eclipse-plugin-version}</version>
+				<configuration>
+					<projectNameTemplate>${project.name}</projectNameTemplate>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+					<additionalConfig>
+						<file>
+							<name>.settings/org.eclipse.core.resources.prefs</name>
+							<content>
+								<![CDATA[eclipse.preferences.version=1${line.separator}encoding/<project>=${project.build.sourceEncoding}${line.separator}]]>
+							</content>
+						</file>
+					</additionalConfig>
+				</configuration>
+			</plugin>
+
+			<!-- Commit-ID Plugin -->
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>${git-commit-id-version}</version>
+				<executions>
+					<execution>
+						<id>get-the-git-infos</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<dotGitDirectory>.git/</dotGitDirectory>
+				</configuration>
+			</plugin>
+
+			<!-- Shade Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>${maven-shade-plugin-version}</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<dependencyReducedPomLocation>${project.basedir}/target/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+					<filters>
+						<filter>
+							<artifact>*</artifact>
+							<excludes>
+								<exclude>META-INF/*.RSA</exclude>
+								<exclude>META-INF/*.SF</exclude>
+							</excludes>
+						</filter>
+					</filters>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>spigotmc-repo</id>
+			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<artifactId>spigot-api</artifactId>
+			<groupId>org.spigotmc</groupId>
+			<version>${spigot-api-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<artifactId>common-core</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${common-core-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<artifactId>plugin-lib</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${plugin-lib-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<artifactId>javacord-core</artifactId>
+			<groupId>org.javacord</groupId>
+			<version>${javacord-core-version}</version>
+		</dependency>
+	</dependencies>
+</project>
