@@ -7,3 +7,16 @@ depend:
 authors: [ lorenzop ]
 website: ${project.url}
 description: ${project.description}
+permissions:
+    discord.*:
+        default: op
+        description: Allow all discord commands
+        children:
+            discord.cmd.link:   true
+            discord.cmd.unlink: true
+    discord.cmd.link:
+        default: op
+        description: "Allow command: /link"
+    discord.cmd.unlink:
+        default: op
+        description: "Allow command: /unlink"
