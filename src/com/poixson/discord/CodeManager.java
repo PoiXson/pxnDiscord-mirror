@@ -20,7 +20,7 @@ public class CodeManager extends BukkitRunnable implements xStartStop {
 	public static final long INTERVAL_CLEANUP =    5L; // 5 minutes
 
 	protected final DiscordPlugin plugin;
-	protected final xRand rnd = new xRand();
+	protected final xRand random = (new xRand()).seed_time();
 
 	protected final HashMapTimeout<UUID, Long> codes_players = new HashMapTimeout<UUID, Long>();
 	protected final HashMapTimeout<Long, Long> codes_users   = new HashMapTimeout<Long, Long>();
@@ -61,7 +61,7 @@ public class CodeManager extends BukkitRunnable implements xStartStop {
 			throw new RuntimeException("Invalid code digits: "+Integer.toString(code_digits));
 		final int code_max = ((int)Math.pow(10, code_digits)) - 1;
 		final int code_min = code_max / 9;
-		return this.rnd.nextLong(code_min, code_max);
+		return this.random.nextLong(code_min, code_max);
 	}
 
 
