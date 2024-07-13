@@ -79,6 +79,9 @@ public class DiscordPlugin extends xJavaPlugin {
 			if (previous != null)
 				previous.close();
 		}
+		// save
+		this.setConfigChanged();
+		this.saveConfigs();
 	}
 
 	@Override
@@ -156,7 +159,6 @@ public class DiscordPlugin extends xJavaPlugin {
 				}
 			}
 		}
-		this.saveConfigs();
 	}
 	@Override
 	protected void saveConfigs() {
