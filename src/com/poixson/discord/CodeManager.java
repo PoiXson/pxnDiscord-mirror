@@ -1,7 +1,7 @@
 package com.poixson.discord;
 
 import static com.poixson.utils.BukkitUtils.SafeCancel;
-import static com.poixson.utils.NumberUtils.IsMinMax;
+import static com.poixson.utils.MathUtils.IsMinMax;
 
 import java.util.Map.Entry;
 import java.util.UUID;
