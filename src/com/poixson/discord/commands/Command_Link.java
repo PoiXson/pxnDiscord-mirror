@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 import com.poixson.discord.DiscordPlugin;
 import com.poixson.tools.commands.pxnCommandRoot;
-import com.poixson.utils.NumberUtils;
+import com.poixson.utils.MathUtils;
 
 
 public class Command_Link extends pxnCommandRoot {
@@ -69,7 +69,7 @@ public class Command_Link extends pxnCommandRoot {
 			}
 		// /link <code>
 		} else {
-			final long code = NumberUtils.ToLong(args[0]);
+			final long code = MathUtils.ToLong(args[0]);
 			final long user_id = this.plugin.getUserIdByCode(code);
 			// invalid code
 			if (user_id <= 0L) {
