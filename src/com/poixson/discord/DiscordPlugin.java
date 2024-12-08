@@ -18,7 +18,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.javacord.api.DiscordApi;
@@ -29,11 +28,14 @@ import com.poixson.discord.bot.Bot;
 import com.poixson.discord.commands.Commands;
 import com.poixson.tools.xJavaPlugin;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+
 
 public class DiscordPlugin extends xJavaPlugin {
 	@Override public int getSpigotPluginID() { return 117334; }
 	@Override public int getBStatsID() {       return 22211;  }
-	public static final String CHAT_PREFIX = ChatColor.DARK_AQUA+"[Discord] "+ChatColor.WHITE;
+	public static final Component CHAT_PREFIX = Component.text("[Discord] ").color(NamedTextColor.AQUA);
 
 	protected final AtomicReference<Bot> bot = new AtomicReference<Bot>(null);
 

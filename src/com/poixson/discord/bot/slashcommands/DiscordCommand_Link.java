@@ -6,7 +6,6 @@ import java.awt.Color;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.message.MessageFlag;
@@ -19,6 +18,9 @@ import org.javacord.api.interaction.SlashCommandOptionBuilder;
 import org.javacord.api.interaction.SlashCommandOptionType;
 
 import com.poixson.discord.DiscordPlugin;
+
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 
 public class DiscordCommand_Link {
@@ -103,12 +105,12 @@ public class DiscordCommand_Link {
 							.setTitle(String.format("%s Account linked successfully!", Character.toString(0x1F91D)))
 							.setDescription(String.format("Join the __*%s*__ voice channel for proximity chat.", this.plugin.getVoiceChannel()))
 						).respond();
-					player.sendMessage(String.format(
-						"%sLinked to your discord account\n%sJoin the %s%s%s voice channel for proximity chat.",
-						CHAT_PREFIX, CHAT_PREFIX,
-						ChatColor.GOLD, this.plugin.getVoiceChannel(),
-						ChatColor.RESET
-					));
+					player.sendMessage(Component.empty()
+						.append(CHAT_PREFIX.append(Component.text("Linked to your discord account\n"  ).color(NamedTextColor.AQUA)))
+						.append(CHAT_PREFIX.append(Component.text("Join the "                         ).color(NamedTextColor.AQUA)))
+						.append(                   Component.text(this.plugin.getVoiceChannel()       ).color(NamedTextColor.GOLD) )
+						.append(                   Component.text(" voice channel for proximity chat.").color(NamedTextColor.AQUA) )
+					);
 					this.log().info("Linked discord account for player: " + player.getName());
 				}
 			}

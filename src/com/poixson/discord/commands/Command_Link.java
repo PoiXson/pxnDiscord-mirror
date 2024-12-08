@@ -5,13 +5,15 @@ import static com.poixson.discord.DiscordPlugin.CHAT_PREFIX;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.poixson.discord.DiscordPlugin;
 import com.poixson.tools.commands.pxnCommandRoot;
 import com.poixson.utils.MathUtils;
+
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 
 public class Command_Link extends pxnCommandRoot {
@@ -47,24 +49,23 @@ public class Command_Link extends pxnCommandRoot {
 		if (!player.hasPermission("discord.cmd.link")) return false;
 		// account already linked
 		if (this.plugin.isLinked(player)) {
-			player.sendMessage(String.format("%s%sAccount already linked!", CHAT_PREFIX, ChatColor.RED));
+			player.sendMessage(CHAT_PREFIX.append(Component.text("Account already linked!").color(NamedTextColor.RED)));
 		} else
 		// /link
 		if (args.length == 0) {
 			final long code = this.plugin.registerPlayerCode(player);
 			// failed to create code
 			if (code < 0L) {
-				player.sendMessage(String.format("%s%sFailed to create a code!", CHAT_PREFIX, ChatColor.RED));
+				player.sendMessage(CHAT_PREFIX.append(Component.text("Failed to create a code!").color(NamedTextColor.RED)));
 				this.log().info("Failed to create a discord link code for player: " + player.getName());
 			// created code
 			} else {
-				player.sendMessage(String.format(
-					"%s%sLinking Your Account\n" +
-					"%s%sType /link %s%d%s in game to complete the linking process.",
-					CHAT_PREFIX, ChatColor.AQUA,
-					CHAT_PREFIX, ChatColor.AQUA,
-					ChatColor.GREEN, Long.valueOf(code), ChatColor.AQUA
-				));
+				player.sendMessage(Component.empty()
+					.append(CHAT_PREFIX.append(Component.text("Linking Your Account\n"                   ).color(NamedTextColor.AQUA)))
+					.append(CHAT_PREFIX.append(Component.text("Type "                                    ).color(NamedTextColor.AQUA)))
+					.append(                   Component.text("/link "+Long.toString(code)               ).color(NamedTextColor.GREEN))
+					.append(                   Component.text(" in game to complete the linking process.").color(NamedTextColor.AQUA) )
+				);
 				this.log().info("Created discord link code: " + player.getName());
 			}
 		// /link <code>
@@ -73,17 +74,17 @@ public class Command_Link extends pxnCommandRoot {
 			final long user_id = this.plugin.getUserIdByCode(code);
 			// invalid code
 			if (user_id <= 0L) {
-				player.sendMessage(String.format("%s%sInvalid code!", CHAT_PREFIX, ChatColor.RED));
+				player.sendMessage(CHAT_PREFIX.append(Component.text("Invalid code!").color(NamedTextColor.RED)));
 				this.log().info("Player provided invalid code: " + player.getName());
 			// link accounts
 			} else {
 				this.plugin.registerLinkedDiscord(player, user_id);
-				player.sendMessage(String.format(
-					"%sLinked to your discord account\n%sJoin the %s%s%s voice channel for proximity chat.",
-					CHAT_PREFIX, CHAT_PREFIX,
-					ChatColor.GOLD, this.plugin.getVoiceChannel(),
-					ChatColor.RESET
-				));
+				player.sendMessage(Component.empty()
+					.append(CHAT_PREFIX.append(Component.text("Your discord account is now linked\n").color(NamedTextColor.AQUA)))
+					.append(CHAT_PREFIX.append(Component.text("Join the "                           ).color(NamedTextColor.AQUA)))
+					.append(                   Component.text(this.plugin.getVoiceChannel()         ).color(NamedTextColor.GOLD) )
+					.append(                   Component.text(" voice channel for proximity chat."  ).color(NamedTextColor.AQUA) )
+				);
 				this.log().info("Linked discord account for player: " + player.getName());
 			}
 		}

@@ -5,12 +5,14 @@ import static com.poixson.discord.DiscordPlugin.CHAT_PREFIX;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.poixson.discord.DiscordPlugin;
 import com.poixson.tools.commands.pxnCommandRoot;
+
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 
 public class Command_Unlink extends pxnCommandRoot {
@@ -41,10 +43,12 @@ public class Command_Unlink extends pxnCommandRoot {
 		final Player player = (Player) sender;
 		if (!player.hasPermission("discord.cmd.unlink")) return false;
 		if (this.plugin.unregisterLinkedDiscord(player)) {
-			player.sendMessage(String.format("%s%sUnlinked your discord account", CHAT_PREFIX, ChatColor.RED));
+			player.sendMessage(CHAT_PREFIX.append(Component.text(
+				"Unlinked your discord account").color(NamedTextColor.RED)));
 			this.log().info("Unlinked discord account: " + player.getName());
 		} else {
-			player.sendMessage(String.format("%s%sYour account is not linked to discord", CHAT_PREFIX, ChatColor.DARK_RED));
+			player.sendMessage(CHAT_PREFIX.append(Component.text(
+				"Your account is not linked to discord").color(NamedTextColor.DARK_RED)));
 		}
 		return true;
 	}
