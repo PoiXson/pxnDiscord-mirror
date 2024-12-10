@@ -2,8 +2,11 @@ name: ${project.name}
 main: com.poixson.discord.DiscordPlugin
 version: '${project.version}'
 api-version: '${bukkit-short-version}'
-depends:
-  - pxnPluginLib
+dependencies:
+    server:
+        pxnPluginLib:
+            load: BEFORE
+            required: true
 authors: lorenzop
 website: ${project.url}
 description: ${project.description}
