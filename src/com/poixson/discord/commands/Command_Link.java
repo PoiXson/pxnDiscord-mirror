@@ -57,16 +57,16 @@ public class Command_Link extends pxnCommandRoot {
 			// failed to create code
 			if (code < 0L) {
 				player.sendMessage(CHAT_PREFIX.append(Component.text("Failed to create a code!").color(NamedTextColor.RED)));
-				this.log().info("Failed to create a discord link code for player: " + player.getName());
+				this.log().info("Failed to create a discord link code for player: "+player.getName());
 			// created code
 			} else {
-				player.sendMessage(Component.empty()
-					.append(CHAT_PREFIX.append(Component.text("Linking Your Account\n"                   ).color(NamedTextColor.AQUA)))
-					.append(CHAT_PREFIX.append(Component.text("Type "                                    ).color(NamedTextColor.AQUA)))
-					.append(                   Component.text("/link "+Long.toString(code)               ).color(NamedTextColor.GREEN))
-					.append(                   Component.text(" in game to complete the linking process.").color(NamedTextColor.AQUA) )
-				);
-				this.log().info("Created discord link code: " + player.getName());
+				player.sendMessage(Component.textOfChildren(
+					CHAT_PREFIX, Component.text("Linking Your Account\n"      ).color(NamedTextColor.AQUA ),
+					CHAT_PREFIX, Component.text("Type "                       ).color(NamedTextColor.AQUA ),
+					Component.text("/link "+Long.toString(code)               ).color(NamedTextColor.GREEN),
+					Component.text(" in game to complete the linking process.").color(NamedTextColor.AQUA )
+				));
+				this.log().info("Created discord link code: "+player.getName());
 			}
 		// /link <code>
 		} else {
@@ -79,13 +79,13 @@ public class Command_Link extends pxnCommandRoot {
 			// link accounts
 			} else {
 				this.plugin.registerLinkedDiscord(player, user_id);
-				player.sendMessage(Component.empty()
-					.append(CHAT_PREFIX.append(Component.text("Your discord account is now linked\n").color(NamedTextColor.AQUA)))
-					.append(CHAT_PREFIX.append(Component.text("Join the "                           ).color(NamedTextColor.AQUA)))
-					.append(                   Component.text(this.plugin.getVoiceChannel()         ).color(NamedTextColor.GOLD) )
-					.append(                   Component.text(" voice channel for proximity chat."  ).color(NamedTextColor.AQUA) )
-				);
-				this.log().info("Linked discord account for player: " + player.getName());
+				player.sendMessage(Component.textOfChildren(
+					CHAT_PREFIX, Component.text("Your discord account is now linked\n").color(NamedTextColor.AQUA),
+					CHAT_PREFIX, Component.text("Join the "                           ).color(NamedTextColor.AQUA),
+					Component.text(this.plugin.getVoiceChannel()                      ).color(NamedTextColor.GOLD),
+					Component.text(" voice channel for proximity chat."               ).color(NamedTextColor.AQUA)
+				));
+				this.log().info("Linked discord account for player: "+player.getName());
 			}
 		}
 		return true;
