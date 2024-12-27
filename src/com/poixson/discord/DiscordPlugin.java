@@ -46,7 +46,7 @@ public class DiscordPlugin extends xJavaPlugin {
 
 
 	public DiscordPlugin() {
-		super(DiscordPlugin.class);
+		super();
 	}
 
 
