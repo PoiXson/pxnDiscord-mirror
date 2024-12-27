@@ -1,6 +1,7 @@
 package com.poixson.discord.commands;
 
 import static com.poixson.discord.DiscordPlugin.CHAT_PREFIX;
+import static com.poixson.utils.MathUtils.ToLong;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,7 +11,6 @@ import org.bukkit.entity.Player;
 
 import com.poixson.discord.DiscordPlugin;
 import com.poixson.tools.commands.pxnCommandRoot;
-import com.poixson.utils.MathUtils;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -70,7 +70,7 @@ public class Command_Link extends pxnCommandRoot {
 			}
 		// /link <code>
 		} else {
-			final long code = MathUtils.ToLong(args[0]);
+			final long code = ToLong(args[0]);
 			final long user_id = this.plugin.getUserIdByCode(code);
 			// invalid code
 			if (user_id <= 0L) {

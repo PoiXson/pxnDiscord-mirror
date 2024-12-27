@@ -1,5 +1,7 @@
 package com.poixson.discord.bot;
 
+import static com.poixson.utils.FileUtils.OpenResource;
+
 import java.awt.image.BufferedImage;
 import java.io.Closeable;
 import java.io.IOException;
@@ -15,7 +17,6 @@ import org.javacord.api.util.logging.FallbackLoggerConfiguration;
 
 import com.poixson.discord.DiscordPlugin;
 import com.poixson.discord.bot.slashcommands.DiscordCommands;
-import com.poixson.utils.FileUtils;
 
 
 public class Bot implements Closeable {
@@ -46,7 +47,7 @@ public class Bot implements Closeable {
 		// default avatar
 		if (this.discord.getYourself().hasDefaultAvatar()) {
 			try {
-				final InputStream in = FileUtils.OpenResource(this.getClass(), "icon.png");
+				final InputStream in = OpenResource(this.getClass(), "icon.png");
 				BufferedImage icon = ImageIO.read(in);
 				this.discord.updateAvatar(icon);
 			} catch (IOException e) {
