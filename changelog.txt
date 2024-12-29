@@ -1,0 +1,6 @@
+pxnDiscord - Provides proximity voice chat on Minecraft servers using Discord
+
+
+2025-- - 0.2.
+==================
+* initial release
