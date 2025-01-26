@@ -32,7 +32,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
 
-public class DiscordPlugin extends xJavaPlugin {
+public class DiscordPlugin extends xJavaPlugin<DiscordPlugin> {
 	@Override public int getBStatsID() { return 22211; }
 	public static final Component CHAT_PREFIX = Component.text("[Discord] ").color(NamedTextColor.AQUA);
 
